@@ -1,0 +1,24 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+    echo "Loading ldd modules..."
+
+    /usr/bin/scull_load
+    /usr/bin/module_load faulty
+
+    modprobe hello
+    ;;
+  stop)
+    echo "Unloading ldd modules..."
+
+    rmmod hello
+
+    /usr/bin/scull_unload
+    /usr/bin/module_unload faulty
+    ;;
+  *)
+    echo "Invalid input!"
+
+    exit 1
+esac
